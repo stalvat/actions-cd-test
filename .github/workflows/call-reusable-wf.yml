@@ -1,0 +1,15 @@
+name: Call reusable WF
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: stalvat/repo-test-with-login-pass/.github/workflows/accesses.yml@master
+
+      - name: get secrets
+        run: |
+          echo "SSH_USER=${{ secrets.SSH_USER }}, SSH_HOST=${{ secrets.SSH_HOST }}, SSH_PRIVATE_KEY=${{ secrets.SSH_PRIVATE_KEY }}"
