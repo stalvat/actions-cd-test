@@ -5,7 +5,7 @@ on:
 
 jobs:
   call-fe-deployement:
-    uses: stalvat/actions-cd-test/.github/workflows/deploy-fe.yml@master
+    uses: stalvat/actions-cd-test/.github/workflows/deploy-fe.yml@test-modification-wf
     secrets:
       user: ${{ secrets.SSH_USER }}
       host: ${{ secrets.SSH_HOST }}
