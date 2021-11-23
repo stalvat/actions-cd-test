@@ -5,4 +5,4 @@ on:
 
 jobs:
   call-reusable:
-    uses: stalvat/repo-test-with-login-pass/.github/workflows/accesses.yml@master
+    uses: stalvat/actions-cd-test/.github/workflows/reusable.yml@master
