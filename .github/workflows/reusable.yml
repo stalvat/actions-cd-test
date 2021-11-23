@@ -1,0 +1,12 @@
+name: WF to get accesses
+
+on:
+  workflow_call:
+
+jobs:
+  get_credentials:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get secrets
+        run: |
+          echo "SSH_USER=${{ secrets.SSH_USER }}, SSH_HOST=${{ secrets.SSH_HOST }}, SSH_PRIVATE_KEY=${{ secrets.SSH_PRIVATE_KEY }}"
