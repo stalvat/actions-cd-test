@@ -1,0 +1,13 @@
+name: Deploy FE on AIST PREPROD
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-reusable:
+    uses: stalvat/actions-cd-test/.github/workflows/deploy-fe.yml@master
+    with:
+      secrets:
+        user: ${{ secrets.SSH_USER }}
+        host: ${{ secrets.SSH_HOST }}
+        private_key: ${{ secrets.SSH_PRIVATE_KEY }}
