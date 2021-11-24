@@ -2,6 +2,10 @@ name: Deploy Wheel Frontend
 
 on:
   workflow_call:
+    inputs:
+      base_url:
+        required: true
+        type: string
     secrets:
       user:
         required: true
@@ -38,8 +42,26 @@ jobs:
         run: |
           npm i
           npm run build
-          echo ${{ github.ref_name }} >> ./dist/test.md
-          echo ${{ github.sha }} >> ./dist/test.md
+          find ./dist -type f -name 'test.*' -exec bash -c \
+          'echo "interface IEnvironment {" > {} \
+          && echo "    code?: string," >> {} \
+          && echo "    production: boolean," >> {} \
+          && echo "    configEndpoint: string," >> {} \
+          && echo "    consultationEndpoint: string," >> {} \
+          && echo "    clientEndpoint: string," >> {} \
+          && echo "    branch: string," >> {} \
+          && echo "    hash: string," >> {} \
+          && echo "}" >> {} \
+          && echo "" >> {} \
+          && echo "export const environment: IEnvironment = {" >> {} \
+          && echo "    code: \"wl\"," >> {} \
+          && echo "    production: true," >> {} \
+          && echo "    configEndpoint: \"https://${{ inputs.base_url }}/client-api/bo/instance\"," >> {} \
+          && echo "    consultationEndpoint: \"https://${{ inputs.base_url }}/client-api/bo/consultations\"," >> {} \
+          && echo "    clientEndpoint: \"https://${{ inputs.base_url }}/client-api\"," >> {} \
+          && echo "    branch: \"${{ github.ref_name }}\"," >> {} \
+          && echo "    hash: \"${{ github.sha }}\"," >> {} \
+          && echo "}" >> {}' \;
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2

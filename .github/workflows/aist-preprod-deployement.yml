@@ -6,6 +6,8 @@ on:
 jobs:
   call-fe-deployement:
     uses: stalvat/actions-cd-test/.github/workflows/deploy-fe.yml@test-modification-wf
+    with:
+      base_url: 'preprod.aist.fr'
     secrets:
       user: ${{ secrets.SSH_USER }}
       host: ${{ secrets.SSH_HOST }}
