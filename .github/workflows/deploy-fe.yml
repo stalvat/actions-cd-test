@@ -38,7 +38,8 @@ jobs:
         run: |
           npm i
           npm run build
-          echo 'TEST' >> ./dist/test.md
+          echo '${{ github.base_ref }}\n' >> ./dist/test.md
+          echo '${{ github.sha }}\n' >> ./dist/test.md
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
