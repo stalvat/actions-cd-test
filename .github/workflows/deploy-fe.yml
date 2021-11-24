@@ -77,7 +77,7 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.host }} >> ~/.ssh/known_hosts
 
       - name: Remove last dist directory
-        run: ssh ${{ secrets.user }}@${{ secrets.host }} -c 'rm -rf ~/preprod/test-cd/*'
+        run: ssh ${{ secrets.user }}@${{ secrets.host }} 'rm -rf ~/preprod/test-cd/*'
 
       - name: Deploy with rsync
         run: rsync -avz ./dist/ ${{ secrets.user }}@${{ secrets.host }}:/home/aist/preprod/test-cd
