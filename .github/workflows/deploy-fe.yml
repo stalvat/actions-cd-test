@@ -42,7 +42,7 @@ jobs:
         run: |
           npm i
           npm run build
-          find ./dist -type f -name 'test.*' -exec bash -c \
+          find ./dist -type f -name 'environment.*' -exec bash -c \
           'echo "interface IEnvironment {" > {} \
           && echo "    code?: string," >> {} \
           && echo "    production: boolean," >> {} \
