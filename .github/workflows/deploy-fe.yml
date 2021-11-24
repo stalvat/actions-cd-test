@@ -38,11 +38,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: npm install and npm run build
+      - name: Run npm install and npm run build
         run: |
-          npm i \
-          && npm run build \
-          && find ./dist -type f -name 'environment.*' -exec bash -c \
+          npm i
+          npm run build
+
+      - name: Environment modification
+        run: |
+          find ./dist -type f -name 'environment.*' -exec bash -c \
           'echo "interface IEnvironment {" > {} \
           && echo "    code?: string," >> {} \
           && echo "    production: boolean," >> {} \
@@ -61,8 +64,11 @@ jobs:
           && echo "    clientEndpoint: \"https://${{ inputs.base_url }}/client-api\"," >> {} \
           && echo "    branch: \"${{ github.ref_name }}\"," >> {} \
           && echo "    hash: \"${{ github.sha }}\"," >> {} \
-          && echo "}" >> {}' \; \
-          && find ./dist -type f -name 'environment.*' -exec cat {} +
+          && echo "}" >> {}' \;
+
+      - name: Display new env file
+        run: |
+          find ./dist -type f -name 'environment.*' -exec cat {} +
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
