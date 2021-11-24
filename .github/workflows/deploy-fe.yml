@@ -69,7 +69,7 @@ jobs:
       - name: Run npm install and ng build
         run: |
           npm i
-          ng build
+          npm run build -- --c production
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
