@@ -64,7 +64,7 @@ jobs:
 
       - name: Display new env file
         run: |
-          find ./dist -type f -name 'environment.*' -exec cat {} +
+          find ./src -type f -name 'environment.*' -exec cat {} +
 
       - name: Run npm install and ng build
         run: |
