@@ -1,9 +1,9 @@
 interface IEnvironment {
   production: boolean,
-  myEnv: string,
+  code: string,
 }
 
 export const environment: IEnvironment = {
   production: true,
-  myEnv: 'PROD'
+  code: 'TEST'
 };

@@ -8,5 +8,5 @@ import { environment as env } from "../environments/environment";
 })
 export class AppComponent {
   title = 'actions-cd-test';
-  env = env.myEnv;
+  envCode = env.code;
 }

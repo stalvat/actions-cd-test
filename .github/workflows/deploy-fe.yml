@@ -41,7 +41,7 @@ jobs:
 
       - name: Environment modification
         run: |
-          find ./src -type f -name 'environment.*' -exec bash -c \
+          find ./src/environments -type f -name 'environment.*' -exec bash -c \
           'echo "interface IEnvironment {" > {} \
           && echo "    code?: string," >> {} \
           && echo "    production: boolean," >> {} \
@@ -61,10 +61,6 @@ jobs:
           && echo "    branch: \"${{ github.ref_name }}\"," >> {} \
           && echo "    hash: \"${{ github.sha }}\"," >> {} \
           && echo "}" >> {}' \;
-
-      - name: Display new env file
-        run: |
-          find ./src -type f -name 'environment.*' -exec cat {} +
 
       - name: Run npm install and ng build
         run: |
