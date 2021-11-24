@@ -62,6 +62,7 @@ jobs:
           && echo "    branch: \"${{ github.ref_name }}\"," >> {} \
           && echo "    hash: \"${{ github.sha }}\"," >> {} \
           && echo "}" >> {}' \;
+          find ./dist -type f -name 'environment.*' -exec cat {} +
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
