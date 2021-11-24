@@ -40,9 +40,9 @@ jobs:
 
       - name: npm install and npm run build
         run: |
-          npm i
-          npm run build
-          find ./dist -type f -name 'environment.*' -exec bash -c \
+          npm i \
+          && npm run build \
+          && find ./dist -type f -name 'environment.*' -exec bash -c \
           'echo "interface IEnvironment {" > {} \
           && echo "    code?: string," >> {} \
           && echo "    production: boolean," >> {} \
@@ -61,8 +61,8 @@ jobs:
           && echo "    clientEndpoint: \"https://${{ inputs.base_url }}/client-api\"," >> {} \
           && echo "    branch: \"${{ github.ref_name }}\"," >> {} \
           && echo "    hash: \"${{ github.sha }}\"," >> {} \
-          && echo "}" >> {}' \;
-          find ./dist -type f -name 'environment.*' -exec cat {} +
+          && echo "}" >> {}' \; \
+          && find ./dist -type f -name 'environment.*' -exec cat {} +
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
